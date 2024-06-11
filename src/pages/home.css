@@ -1,0 +1,54 @@
+.home-background:before {
+  @apply absolute inset-0 animate-pulse;
+  content: '';
+  background: radial-gradient(
+    80vw 60vh at 50% 100%,
+    #e99b25 0%,
+    rgba(217, 26, 0, 0) 100%
+  );
+}
+
+.home-background {
+  @apply relative;
+  animation: 20s linear infinite hueChange;
+}
+
+.home-background:after {
+  @apply absolute mix-blend-multiply inset-0 opacity-20;
+  content: '';
+  background-image: url('/tiled_pattern.png');
+  background-size: 200px;
+  background-position: center center;
+  background-repeat: repeat;
+  animation: 500ms steps(5, jump-end) infinite staticMove;
+}
+
+@keyframes staticMove {
+  0% {
+    background-position: 500 24;
+  }
+  25% {
+    background-position: 100 16;
+  }
+  50% {
+    background-position: 0 0;
+  }
+  75% {
+    background-position: 24 170;
+  }
+  100% {
+    background-position: 16 28;
+  }
+}
+
+@keyframes hueChange {
+  0% {
+    filter: hue-rotate(0deg);
+  }
+  50% {
+    filter: hue-rotate(180deg);
+  }
+  100% {
+    filter: hue-rotate(360deg);
+  }
+}

@@ -1,0 +1,201 @@
+/* Grid definitions */
+
+.slot-1 {
+  grid-area: s-1;
+}
+
+.slot-2 {
+  grid-area: s-2;
+}
+
+.slot-3 {
+  grid-area: s-3;
+}
+
+.slot-4 {
+  grid-area: s-4;
+}
+
+.slot-5 {
+  grid-area: s-5;
+}
+
+.slot-6 {
+  grid-area: s-6;
+}
+
+.slot-7 {
+  grid-area: s-7;
+}
+
+.slot-8 {
+  grid-area: s-8;
+}
+
+.slot-9 {
+  grid-area: s-9;
+}
+
+.slot-10 {
+  grid-area: s-10;
+}
+
+.slot-11 {
+  grid-area: s-11;
+}
+
+.slot-12 {
+  grid-area: s-12;
+}
+
+.grid-1 {
+  @apply grid-cols-1 grid-rows-1 lg:grid-cols-1 lg:grid-rows-1;
+  grid-template-areas: 's-1';
+  @media screen(lg) {
+    grid-template-areas: 's-1';
+  }
+}
+
+.grid-2 {
+  @apply grid-cols-1 grid-rows-2 lg:grid-cols-2 lg:grid-rows-1;
+  grid-template-areas:
+    's-1'
+    's-2';
+  @media screen(lg) {
+    grid-template-areas: 's-1 s-2';
+  }
+}
+
+.grid-3 {
+  @apply grid-cols-1 grid-rows-3 lg:grid-cols-4 lg:grid-rows-2;
+  grid-template-areas:
+    's-1'
+    's-2'
+    's-3';
+  @media screen(lg) {
+    grid-template-areas:
+      's-1 s-1 s-2 s-2'
+      '... s-3 s-3 ...';
+  }
+}
+
+.grid-4 {
+  @apply grid-cols-2 grid-rows-2;
+  grid-template-areas:
+    's-1 s-2'
+    's-3 s-4';
+}
+
+.grid-5 {
+  @apply grid-cols-4 grid-rows-3 lg:grid-cols-6 lg:grid-rows-2;
+  grid-template-areas:
+    's-1 s-1 s-2 s-2'
+    's-3 s-3 s-4 s-4'
+    '... s-5 s-5 ...';
+  @media screen(lg) {
+    grid-template-areas:
+      's-1 s-1 s-2 s-2 s-3 s-3'
+      '... s-4 s-4 s-5 s-5 ...';
+  }
+}
+
+.grid-6 {
+  @apply grid-cols-2 grid-rows-3 lg:grid-cols-3 lg:grid-rows-2;
+  grid-template-areas:
+    's-1 s-2'
+    's-3 s-4'
+    's-5 s-6';
+  @media screen(lg) {
+    grid-template-areas:
+      's-1 s-2 s-3'
+      's-4 s-5 s-6';
+  }
+}
+
+.grid-7 {
+  @apply grid-cols-4 grid-rows-4 lg:grid-cols-6 lg:grid-rows-3;
+  grid-template-areas:
+    's-1 s-1 s-2 s-2'
+    's-3 s-3 s-4 s-4'
+    's-5 s-5 s-6 s-6'
+    '... s-7 s-7 ...';
+  @media screen(lg) {
+    grid-template-areas:
+      's-1 s-1 s-2 s-2 s-3 s-3'
+      's-4 s-4 s-5 s-5 s-6 s-6'
+      '... ... s-7 s-7 ... ...';
+  }
+}
+
+.grid-8 {
+  @apply grid-cols-2 grid-rows-4 lg:grid-cols-6 lg:grid-rows-3;
+  grid-template-areas:
+    's-1 s-2'
+    's-3 s-4'
+    's-5 s-6'
+    's-7 s-8';
+  @media screen(lg) {
+    grid-template-areas:
+      's-1 s-1 s-2 s-2 s-3 s-3'
+      's-4 s-4 s-5 s-5 s-6 s-6'
+      '... s-7 s-7 s-8 s-8 ...';
+  }
+}
+
+.grid-9 {
+  @apply grid-cols-3 grid-rows-3;
+  grid-template-areas:
+    's-1 s-2 s-3'
+    's-4 s-5 s-6'
+    's-7 s-8 s-9';
+}
+
+.grid-10 {
+  @apply grid-cols-2 grid-rows-5 lg:grid-cols-8 lg:grid-rows-3;
+  grid-template-areas:
+    's-1 s-2'
+    's-3 s-4'
+    's-5 s-6'
+    's-7 s-8'
+    's-9 s-10';
+  @media screen(lg) {
+    grid-template-areas:
+      's-1 s-1 s-2 s-2 s-3  s-3  s-4 s-4'
+      's-5 s-5 s-6 s-6 s-7  s-7  s-8 s-8'
+      '... ... s-9 s-9 s-10 s-10 ... ...';
+  }
+}
+
+.grid-11 {
+  @apply grid-cols-4 grid-rows-6 lg:grid-cols-8 lg:grid-rows-3;
+  grid-template-areas:
+    's-1 s-1 s-2 s-2'
+    's-3 s-3 s-4 s-4'
+    's-5 s-5 s-6 s-6'
+    's-7 s-7 s-8 s-8'
+    's-9 s-9 s-10 s-10'
+    '... s-11 s-11 ...';
+  @media screen(lg) {
+    grid-template-areas:
+      's-1 s-1 s-2 s-2  s-3  s-3  s-4  s-4'
+      's-5 s-5 s-6 s-6  s-7  s-7  s-8  s-8'
+      '... s-9 s-9 s-10 s-10 s-11 s-11 ...';
+  }
+}
+
+.grid-12 {
+  @apply grid-cols-2 grid-rows-6 lg:grid-cols-4 lg:grid-rows-3;
+  grid-template-areas:
+    's-1 s-2'
+    's-3 s-4'
+    's-5 s-6'
+    's-7 s-8'
+    's-9 s-10'
+    's-11 s-12';
+  @media screen(lg) {
+    grid-template-areas:
+      's-1 s-2  s-3  s-4'
+      's-5 s-6  s-7  s-8'
+      's-9 s-10 s-11 s-12';
+  }
+}

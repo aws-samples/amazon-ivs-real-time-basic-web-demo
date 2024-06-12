@@ -31,7 +31,7 @@ export function AnimatedModal({ isOpen, onRequestClose, children }) {
       defaultStyles={{}}
       overlayClassName='fixed inset-0 bg-overlay/80 backdrop-blur grid place-items-center transition will-change-transform'
       contentLabel='Settings modal'
-      closeTimeoutMS={500}
+      closeTimeoutMS={150}
     >
       {children}
     </Modal>

@@ -8,7 +8,7 @@ A demo web application intended as an educational tool to demonstrate how you ca
 
 ## Prerequisites
 
-- [NodeJS](https://nodejs.org/) and Node package manager (npm).
+- [NodeJS](https://nodejs.org/) v20.10.0 and Node package manager (npm).
 - `API_URL` from the deployed serverless infrastructure for this demo. To get your `API_URL` follow the instructions in the following README: [Amazon IVS Real-time Basic Web Demo Serverless Infrastructure](./infra/README.md)
 
 ## Running the demo

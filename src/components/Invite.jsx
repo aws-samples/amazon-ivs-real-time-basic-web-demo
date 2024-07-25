@@ -22,8 +22,9 @@ export function Invite({ link, copyLink }) {
   }
 
   const copyButtonClass = clsx([
-    'shrink-0 select-none rounded-md bg-surfaceAlt3 p-1',
+    'shrink-0 select-none rounded-md p-1',
     { 'bg-positive': _copied },
+    { 'bg-surfaceAlt3': !_copied },
   ]);
 
   return (

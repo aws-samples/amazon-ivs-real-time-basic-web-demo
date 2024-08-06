@@ -17,6 +17,7 @@ import { ModalContext } from '../contexts/ModalContext';
 import copyTextToClipboard from '../helpers/clipboard';
 import useToast from '../hooks/useToast';
 import Settings from './Settings';
+import { Invite } from './Invite';
 
 function MediaLoader() {
   return (
@@ -62,13 +63,16 @@ function MediaControls({ inviteLink, handleLeave, tooltipId }) {
     handleLeave();
   }
 
-  function handleInviteClick() {
+  function copyInviteLink() {
     const fullLink = window.location.origin + inviteLink;
+    let copied = false;
     if (copyLinkTimeoutRef.current) clearTimeout(copyLinkTimeoutRef.current);
     try {
       copyTextToClipboard(fullLink);
       showToast('Link copied to clipboard', 'SUCCESS', 'clipboard-toast');
+      console.log('copied');
       setCopyTooltipText('Link copied');
+      copied = true;
     } catch (err) {
       showToast(`Failed to copy link: ${fullLink}`, 'ERROR', 'clipboard-toast');
       setCopyTooltipText('Failed to copy link');
@@ -77,6 +81,13 @@ function MediaControls({ inviteLink, handleLeave, tooltipId }) {
         resetCopyTooltipText();
       }, 2000);
     }
+    return { link: fullLink, copied };
+  }
+
+  function handleInviteClick() {
+    const { link } = copyInviteLink();
+    setModalContent(<Invite link={link} copyLink={copyInviteLink} />);
+    setModalOpen(!modalOpen);
   }
 
   function resetCopyTooltipText() {

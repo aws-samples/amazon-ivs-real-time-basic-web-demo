@@ -10,6 +10,7 @@ import environment from 'vite-plugin-environment';
 import readline from 'readline';
 import process from 'process';
 import { writeFileSync } from 'fs';
+import { viteStaticCopy } from 'vite-plugin-static-copy';
 
 const awsProfile = process.env.AWS_PROFILE;
 const cloudFormationClient = new CloudFormationClient(clientConfig);
@@ -107,6 +108,26 @@ export default defineConfig(async ({ mode }) => {
     generouted(),
     environment({
       API_URL: apiUrl,
+    }),
+    viteStaticCopy({
+      targets: [
+        {
+          src: 'node_modules/@ricky0123/vad-web/dist/vad.worklet.bundle.min.js',
+          dest: './',
+        },
+        {
+          src: 'node_modules/@ricky0123/vad-web/dist/*.onnx',
+          dest: './',
+        },
+        {
+          src: 'node_modules/onnxruntime-web/dist/*.wasm',
+          dest: './',
+        },
+        {
+          src: 'node_modules/onnxruntime-web/dist/*.mjs',
+          dest: './',
+        },
+      ],
     }),
   ];
 

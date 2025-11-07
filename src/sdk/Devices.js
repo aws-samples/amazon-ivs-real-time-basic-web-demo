@@ -164,14 +164,30 @@ async function getCameraTrack(deviceId) {
   return cameraTrack;
 }
 
-async function getMicrophoneTrack(deviceId) {
+async function getMicrophoneTrack(deviceId, options = {}) {
   let microphoneTrack = {};
   try {
-    const media = await navigator.mediaDevices.getUserMedia({
-      video: false,
-      audio: deviceId ? { exact: deviceId } : null,
-    });
-    microphoneTrack = media.getTracks()[0];
+    // Build audio constraints
+    const audioConstraints = deviceId ? { deviceId: { exact: deviceId } } : true;
+    
+    // If Voice Focus is enabled, disable browser noise suppression
+    if (options.disableNoiseSuppression) {
+      const constraints = typeof audioConstraints === 'object' ? audioConstraints : {};
+      constraints.noiseSuppression = false;
+      
+      const media = await navigator.mediaDevices.getUserMedia({
+        video: false,
+        audio: constraints,
+      });
+      microphoneTrack = media.getTracks()[0];
+    } else {
+      // Use default browser settings
+      const media = await navigator.mediaDevices.getUserMedia({
+        video: false,
+        audio: audioConstraints,
+      });
+      microphoneTrack = media.getTracks()[0];
+    }
   } catch (err) {
     console.error('Could not get microphone track:', err.message);
   }

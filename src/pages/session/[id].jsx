@@ -1,4 +1,5 @@
 import LocalMediaProvider from '../../contexts/LocalMediaContext';
+import AudioFiltersProvider from '../../contexts/AudioFiltersContext';
 import StageProvider from '../../contexts/StageContext';
 import StageSession from '../../components/StageSession';
 import ModalProvider from '../../contexts/ModalContext';
@@ -52,27 +53,29 @@ function Session() {
 
   return (
     <LocalParticipantProvider>
-      <LocalMediaProvider>
-        <StageProvider>
-          <ModalProvider>
-            {token !== undefined ? (
-              <StageSession
-                pathname={pathname}
-                token={token}
-                expiration={expiration}
-              />
-            ) : (
-              <JoinSessionDialog
-                username={username}
-                handleChange={handleUsernameChange}
-                handleJoin={getSessionDetails}
-                loading={tokenPending}
-                error={error}
-              />
-            )}
-          </ModalProvider>
-        </StageProvider>
-      </LocalMediaProvider>
+      <AudioFiltersProvider>
+        <LocalMediaProvider>
+          <StageProvider>
+            <ModalProvider>
+              {token !== undefined ? (
+                <StageSession
+                  pathname={pathname}
+                  token={token}
+                  expiration={expiration}
+                />
+              ) : (
+                <JoinSessionDialog
+                  username={username}
+                  handleChange={handleUsernameChange}
+                  handleJoin={getSessionDetails}
+                  loading={tokenPending}
+                  error={error}
+                />
+              )}
+            </ModalProvider>
+          </StageProvider>
+        </LocalMediaProvider>
+      </AudioFiltersProvider>
     </LocalParticipantProvider>
   );
 }

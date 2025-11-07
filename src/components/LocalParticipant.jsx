@@ -1,23 +1,23 @@
-import { useContext } from 'react';
-import { LocalMediaContext } from '../contexts/LocalMediaContext';
+import { useContext } from "react";
+import { LocalMediaContext } from "../contexts/LocalMediaContext";
 
-import { LocalParticipantContext } from '../contexts/LocalParticipantContext';
+import { LocalParticipantContext } from "../contexts/LocalParticipantContext";
 
-import Participant from './Participant';
+import Participant from "./Participant";
 
 const LocalParticipant = function LocalParticipant({ tooltipId }) {
   const { currentVideoDevice } = useContext(LocalMediaContext);
   const { stageParticipant } = useContext(LocalParticipantContext);
 
-  const audioMuted = stageParticipant.audioMuted || false;
+  const audioMuted = stageParticipant?.audioMuted || false;
   const videoStopped = currentVideoDevice?.isMuted || false;
-  const userName = stageParticipant.attributes.username || 'undefined';
+  const userName = stageParticipant?.attributes?.username || "undefined";
 
   return (
     <Participant
-      id={'You'}
-      userId={'You'}
-      userName={`You (${userName})`}
+      id={"You"}
+      userId={"You"}
+      userName={userName}
       isLocal={true}
       tooltipId={tooltipId}
       videoStopped={videoStopped}

@@ -1,10 +1,10 @@
-import clsx from 'clsx';
-import { motion } from 'framer-motion';
-import { useCallback } from 'react';
+import clsx from "clsx";
+import { motion } from "motion/react";
+import { useCallback } from "react";
 import {
   scaleMotionTransitions,
   scaleMotionVariants,
-} from '../helpers/animation';
+} from "../helpers/animation";
 
 function Video({ videoStream, videoFilled, userId }) {
   const streamId = videoStream && videoStream.id;
@@ -20,9 +20,9 @@ function Video({ videoStream, videoFilled, userId }) {
     [videoStream]
   );
 
-  const videoClass = clsx('w-full h-full', {
-    'object-cover': videoFilled,
-    'object-fit': !videoFilled,
+  const videoClass = clsx("w-full h-full", {
+    "object-cover": videoFilled,
+    "object-fit": !videoFilled,
   });
 
   return (
@@ -32,9 +32,9 @@ function Video({ videoStream, videoFilled, userId }) {
       ref={attachRef}
       autoPlay
       playsInline
-      initial='hidden'
-      animate='visible'
-      exit='hidden'
+      initial="hidden"
+      animate="visible"
+      exit="hidden"
       variants={scaleMotionVariants}
       transition={scaleMotionTransitions}
     />

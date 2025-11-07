@@ -1,4 +1,4 @@
-import { motion } from 'framer-motion';
+import { motion } from "motion/react";
 
 function SplitText({ text, ...props }) {
   const wordMotionVariants = {
@@ -24,19 +24,19 @@ function SplitText({ text, ...props }) {
   return (
     <motion.span
       aria-hidden={true}
-      className='inline-block'
+      className="inline-block"
       variants={wordMotionVariants}
-      initial={'initial'}
-      animate={'default'}
+      initial={"initial"}
+      animate={"default"}
     >
-      {text.split(' ').map((word, i) => (
+      {text.split(" ").map((word, i) => (
         <motion.span
           aria-hidden={true}
           key={`split-${i}-${word}`}
-          className='inline-block overflow-hidden'
+          className="inline-block overflow-hidden"
           variants={wordMotionVariants}
         >
-          {word.split('').map((char, i) => {
+          {word.split("").map((char, i) => {
             return (
               <motion.span
                 aria-hidden={true}
@@ -45,10 +45,10 @@ function SplitText({ text, ...props }) {
                 {...props}
               >
                 {/* Wrap this in another span to fix kerning issues */}
-                {'WV'.includes(char) ? (
+                {"WV".includes(char) ? (
                   <span
                     style={{
-                      marginRight: '-0.06em',
+                      marginRight: "-0.06em",
                     }}
                   >
                     {char}
@@ -58,7 +58,7 @@ function SplitText({ text, ...props }) {
                 )}
               </motion.span>
             );
-          })}{' '}
+          })}{" "}
         </motion.span>
       ))}
     </motion.span>

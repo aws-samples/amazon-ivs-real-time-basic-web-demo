@@ -1,10 +1,10 @@
-import Modal from 'react-modal';
-import { motion } from 'framer-motion';
+import Modal from "react-modal";
+import { motion } from "motion/react";
 import {
   scaleMotionTransitions,
   scaleMotionVariants,
-} from '../helpers/animation';
-import './AnimatedModal.css';
+} from "../helpers/animation";
+import "./AnimatedModal.css";
 
 export function AnimatedModal({ isOpen, onRequestClose, children }) {
   return (
@@ -13,24 +13,24 @@ export function AnimatedModal({ isOpen, onRequestClose, children }) {
       onRequestClose={onRequestClose}
       shouldCloseOnOverlayClick={true}
       aria={{
-        labelledby: 'title',
-        describedby: 'full_description',
+        labelledby: "title",
+        describedby: "full_description",
       }}
       contentElement={(props, children) => (
         <motion.div
-          initial='hidden'
-          animate='visible'
+          initial="hidden"
+          animate="visible"
           variants={scaleMotionVariants}
           transition={scaleMotionTransitions}
-          key='modal-motion'
+          key="modal-motion"
           {...props}
         >
           {children}
         </motion.div>
       )}
       defaultStyles={{}}
-      overlayClassName='fixed inset-0 bg-overlay/80 backdrop-blur grid place-items-center transition will-change-transform'
-      contentLabel='Settings modal'
+      overlayClassName="fixed inset-0 bg-overlay/80 backdrop-blur grid place-items-center transition will-change-transform"
+      contentLabel="Settings modal"
       closeTimeoutMS={150}
     >
       {children}

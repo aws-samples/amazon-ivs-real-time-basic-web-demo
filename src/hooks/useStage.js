@@ -44,7 +44,12 @@ export default function useStage() {
   const handleParticipantJoin = useCallback(
     (participantInfo) => {
       if (isLocalParticipant(participantInfo)) {
-        setStageParticipant(participantInfo);
+        // Initialize audioMuted based on the actual audio device state
+        const updatedParticipantInfo = {
+          ...participantInfo,
+          audioMuted: currentAudioDevice?.isMuted || false
+        };
+        setStageParticipant(updatedParticipantInfo);
       } else {
         setParticipants((prevState) => {
           const participant = createParticipant(participantInfo);
@@ -54,7 +59,7 @@ export default function useStage() {
       }
       refreshStageStrategy();
     },
-    [refreshStageStrategy, setStageParticipant]
+    [refreshStageStrategy, setStageParticipant, currentAudioDevice]
   );
 
   const handleParticipantLeave = useCallback(

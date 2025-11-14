@@ -8,6 +8,7 @@ import { AnimatedModal } from "./AnimatedModal";
 import { ModalContext } from "../contexts/ModalContext";
 import { CreateSession } from "./CreateSession";
 import ColorBends from "./ColorBends";
+import { JoinSessionWithToken } from "./JoinSessionWithToken";
 
 function StartScreen() {
   const { modalOpen, setModalOpen, modalContent, setModalContent } =
@@ -25,6 +26,11 @@ function StartScreen() {
 
   function handleStart() {
     setModalContent(<CreateSession handleSuccess={handleSuccess} />);
+    setModalOpen(true);
+  }
+
+  function handleJoinWithToken() {
+    setModalContent(<JoinSessionWithToken handleSuccess={handleSuccess} />);
     setModalOpen(true);
   }
 
@@ -77,7 +83,7 @@ function StartScreen() {
                 Create a session to see and talk with up to 12 other
                 participants in real-time.
               </p>
-              <div className="sm:px-8 w-full max-w-[320px]">
+              <div className="flex flex-col gap-y-2 sm:px-8 w-full max-w-[320px]">
                 <Button
                   appearance="primary"
                   style="roundedText"
@@ -85,6 +91,14 @@ function StartScreen() {
                   onClick={handleStart}
                 >
                   <span className="font-bold">Create session</span>
+                </Button>
+                <Button
+                  appearance="default"
+                  style="roundedText"
+                  fullWidth={true}
+                  onClick={handleJoinWithToken}
+                >
+                  <span className="font-bold">Join with token</span>
                 </Button>
               </div>
             </div>

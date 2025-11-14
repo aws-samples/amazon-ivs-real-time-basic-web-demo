@@ -20,6 +20,14 @@ async function createSession({ username }) {
   return { token, attributes, sessionId, expiration };
 }
 
+function createSessionWithToken(token) {
+  const attributes = token.attributes;
+  const sessionId = token.topic;
+  const expiration = token.exp;
+
+  return { token, attributes, sessionId, expiration };
+}
+
 async function getSessionToken(id, username) {
   if (!id) return;
 
@@ -39,4 +47,4 @@ async function getSessionToken(id, username) {
   return { token, attributes, expiration };
 }
 
-export { getSessionToken, createSession };
+export { getSessionToken, createSession, createSessionWithToken };

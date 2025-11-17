@@ -12,7 +12,10 @@ import "./StageSession.css";
 import { Tooltip } from "react-tooltip";
 import { AnimatedModal } from "./AnimatedModal";
 import { Button } from "./Buttons";
-import { InformationCircleIcon } from "@heroicons/react/24/outline";
+import {
+  InformationCircleIcon,
+  UserCircleIcon,
+} from "@heroicons/react/24/solid";
 import { About } from "./About";
 import clsx from "clsx";
 
@@ -38,7 +41,7 @@ function ViewOnlyStageSession({ pathname, token, isTokenSession }) {
   // For view-only mode, subtract one from the total to hide the
   // current participant's media from the grid.
   const participantCount = participants?.size ?? 0;
-  const totalParticipants = participantCount - 1;
+  const totalParticipants = Math.max(0, participantCount - 1);
 
   const gridClass = clsx("grid gap-2 md:py-2", {
     "grid-1": totalParticipants === 0,
@@ -111,8 +114,11 @@ function ViewOnlyStageSession({ pathname, token, isTokenSession }) {
           {stageJoined ? (
             <>
               {totalParticipants === 0 && (
-                <div className="slot-1 grid place-items-center rounded-xl overflow-hidden relative bg-black text-white">
-                  No participants
+                <div className="slot-1 grid place-items-center rounded-xl overflow-hidden relative bg-surfaceAlt dark:bg-surface text-uiText/50">
+                  <div className="flex flex-col items-center gap-y-1 select-none">
+                    <UserCircleIcon className="size-10" />
+                    <span className="text-sm">No publishers</span>
+                  </div>
                 </div>
               )}
               <RemoteParticipants

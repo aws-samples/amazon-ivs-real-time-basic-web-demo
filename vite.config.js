@@ -74,7 +74,8 @@ const initApiUrl = async () => {
     );
 
     if (!shouldContinue) {
-      throw new Error('Operation aborted by user.');
+      console.log('\nNo API_URL provided. Session join and create are disabled.\n');
+      return 'undefined';
     }
 
     apiUrl = await validateApiUrl();
@@ -93,16 +94,21 @@ const initApiUrl = async () => {
       console.error('Failed to write file:', err);
     }
   }
+
+  return apiUrl;
 };
 
 // https://vitejs.dev/config/
 export default defineConfig(async ({ mode }) => {
   const env = loadEnv(mode, process.cwd(), '');
-  let apiUrl = env.API_URL || undefined;
+  let apiUrl = env.API_URL ?? undefined;
+
+  // If the apiUrl is not saved, ask the user to provide one
   if (apiUrl === undefined) {
-    await initApiUrl();
+    apiUrl = await initApiUrl();
   }
 
+  // If the apiUrl is still undefined, set the API_URL to 'undefined'
   const plugins = [
     react(),
     generouted(),

@@ -1,9 +1,6 @@
 import { useCallback, useContext, useEffect, useRef } from "react";
 import useMount from "../hooks/useMount";
 import { StageContext } from "../contexts/StageContext";
-import { AudioFiltersContext } from "../contexts/AudioFiltersContext";
-import { LocalMediaContext } from "../contexts/LocalMediaContext";
-import LocalParticipant from "./LocalParticipant";
 import RemoteParticipants from "./RemoteParticipants";
 import Modal from "react-modal";
 import MediaControls from "./MediaControls";
@@ -11,7 +8,6 @@ import { ModalContext } from "../contexts/ModalContext";
 import Spinner from "./Spinner";
 import { useNavigate } from "../router";
 import toast, { Toaster } from "react-hot-toast";
-import MonitoringToast from "./MonitoringToast";
 import "./StageSession.css";
 import { Tooltip } from "react-tooltip";
 import { AnimatedModal } from "./AnimatedModal";
@@ -31,23 +27,18 @@ function StageSessionLoading() {
   );
 }
 
-function StageSession({ pathname, token, isTokenSession }) {
+function ViewOnlyStageSession({ pathname, token, isTokenSession }) {
   const { modalOpen, setModalOpen, modalContent, setModalContent } =
     useContext(ModalContext);
   const { joinStage, stageJoined, leaveStage, participants } =
     useContext(StageContext);
-  const { monitoringEnabled, toggleMonitoring, voiceFocusEnabled } =
-    useContext(AudioFiltersContext);
-  const { updateLocalAudio, currentAudioDeviceId } =
-    useContext(LocalMediaContext);
   const navigate = useNavigate();
   const isMounted = useMount();
 
+  // For view-only mode, subtract one from the total to hide the
+  // current participant's media from the grid.
   const participantCount = participants?.size ?? 0;
-  const totalParticipants = participantCount;
-
-  const voiceFocusApplied = useRef(false);
-  const monitoringWasEnabled = useRef(false);
+  const totalParticipants = participantCount - 1;
 
   const gridClass = clsx("grid gap-2 md:py-2", {
     "grid-1": totalParticipants === 0,
@@ -90,53 +81,6 @@ function StageSession({ pathname, token, isTokenSession }) {
     if (!initActive.current) initSession();
   }, [isMounted, joinStage, token]);
 
-  // Apply Voice Focus after stage joins if it was pre-enabled in settings
-  useEffect(() => {
-    if (
-      stageJoined &&
-      voiceFocusEnabled &&
-      !voiceFocusApplied.current &&
-      currentAudioDeviceId
-    ) {
-      voiceFocusApplied.current = true;
-      // Re-apply audio with Voice Focus enabled
-      updateLocalAudio(currentAudioDeviceId, { useVoiceFocus: true });
-      console.log("Applying Voice Focus after stage join");
-    }
-  }, [stageJoined, voiceFocusEnabled, currentAudioDeviceId, updateLocalAudio]);
-
-  // Manage monitoring toast - show when monitoring is enabled, dismiss when disabled
-  useEffect(() => {
-    if (monitoringEnabled) {
-      // Show persistent warning about feedback with disable button
-      toast(
-        () =>
-          MonitoringToast({
-            enabled: true,
-            onDisable: () => toggleMonitoring(false),
-          }),
-        {
-          id: "monitoring-status",
-          duration: Infinity,
-        }
-      );
-      monitoringWasEnabled.current = true;
-    } else if (monitoringWasEnabled.current) {
-      // Show toast when monitoring is disabled
-      toast(
-        () =>
-          MonitoringToast({
-            enabled: false,
-            onEnable: () => toggleMonitoring(true),
-          }),
-        {
-          id: "monitoring-status",
-          duration: 4000,
-        }
-      );
-    }
-  }, [monitoringEnabled, toggleMonitoring]);
-
   return (
     <>
       <Toaster containerClassName="!inset-14 md:!inset-4" containerStyle={{}} />
@@ -166,12 +110,14 @@ function StageSession({ pathname, token, isTokenSession }) {
         <div className={gridClass}>
           {stageJoined ? (
             <>
-              <div className="slot-1">
-                <LocalParticipant tooltipId={"MediaControlsTooltip"} />
-              </div>
+              {totalParticipants === 0 && (
+                <div className="slot-1 grid place-items-center rounded-xl overflow-hidden relative bg-black text-white">
+                  No participants
+                </div>
+              )}
               <RemoteParticipants
                 tooltipId={"MediaControlsTooltip"}
-                isViewOnly={false}
+                isViewOnly={true}
               />
             </>
           ) : (
@@ -182,7 +128,7 @@ function StageSession({ pathname, token, isTokenSession }) {
         <div className="flex p-2 items-end justify-center">
           {/* Controls */}
           <MediaControls
-            isViewOnly={false}
+            isViewOnly={true}
             isTokenSession={isTokenSession}
             inviteLink={pathname}
             tooltipId={"MediaControlsTooltip"}
@@ -202,4 +148,4 @@ function StageSession({ pathname, token, isTokenSession }) {
   );
 }
 
-export default StageSession;
+export default ViewOnlyStageSession;

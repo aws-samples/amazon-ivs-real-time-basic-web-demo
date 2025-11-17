@@ -1,7 +1,7 @@
-import { useContext, useEffect } from 'react';
-import { ModalContext } from '../contexts/ModalContext';
-import { AnimatedModal } from './AnimatedModal';
-import { JoinSession } from './JoinSession';
+import { useContext, useEffect } from "react";
+import { ModalContext } from "../contexts/ModalContext";
+import { AnimatedModal } from "./AnimatedModal";
+import { JoinSession } from "./JoinSession";
 
 export function JoinSessionDialog({
   username,
@@ -21,7 +21,7 @@ export function JoinSessionDialog({
   }, []);
 
   return (
-    <main className='w-[100dvw] h-[100dvh] bg-surface dark:bg-surfaceAlt'>
+    <main className="w-[100dvw] h-[100dvh] bg-surface dark:bg-surfaceAlt">
       <AnimatedModal isOpen={modalOpen} onRequestClose={() => null}>
         <JoinSession
           username={username}

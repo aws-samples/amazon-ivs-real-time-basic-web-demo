@@ -11,12 +11,12 @@ const LocalParticipant = function LocalParticipant({ tooltipId }) {
 
   const audioMuted = stageParticipant?.audioMuted || false;
   const videoStopped = currentVideoDevice?.isMuted || false;
-  const userName = stageParticipant?.attributes?.username || "undefined";
+  const userName = stageParticipant?.attributes?.username;
 
   return (
     <Participant
       id={"You"}
-      userId={"You"}
+      userId={stageParticipant?.userId}
       userName={userName}
       isLocal={true}
       tooltipId={tooltipId}

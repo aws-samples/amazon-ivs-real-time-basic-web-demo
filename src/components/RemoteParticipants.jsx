@@ -7,8 +7,13 @@ import {
 } from "../helpers/animation";
 import { RemoteParticipant } from "./RemoteParticipant";
 
-function RemoteParticipants({ tooltipId }) {
+function RemoteParticipants({ tooltipId, isViewOnly }) {
   const { participants } = useContext(StageContext);
+
+  function getSlotName(slot, isViewOnly) {
+    const calculatedSlot = isViewOnly ? slot + 1 : slot + 2;
+    return `slot-${calculatedSlot}`;
+  }
 
   return (
     <>
@@ -17,7 +22,7 @@ function RemoteParticipants({ tooltipId }) {
           return (
             <motion.div
               key={key}
-              className={`slot-${i + 2}`}
+              className={getSlotName(i, isViewOnly)}
               initial="hidden"
               animate="visible"
               exit="hidden"

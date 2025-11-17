@@ -8,6 +8,7 @@ import { AnimatedModal } from "./AnimatedModal";
 import { ModalContext } from "../contexts/ModalContext";
 import { CreateSession } from "./CreateSession";
 import ColorBends from "./ColorBends";
+import { JoinSessionWithToken } from "./JoinSessionWithToken";
 
 function StartScreen() {
   const { modalOpen, setModalOpen, modalContent, setModalContent } =
@@ -16,15 +17,33 @@ function StartScreen() {
   const { pathname, state } = useLocation();
   const { showToast, removeToast } = useToast();
 
-  function handleSuccess({ sessionId, token, attributes, expiration }) {
+  function navigateToSession({ sessionId, token, attributes, expiration }) {
     navigate("/session/:id", {
       params: { id: sessionId },
       state: { token, attributes, expiration },
     });
   }
 
+  function navigateToToken({
+    sessionId,
+    token,
+    attributes,
+    expiration,
+    hasPublish,
+  }) {
+    navigate("/token/:id", {
+      params: { id: sessionId },
+      state: { token, attributes, expiration, hasPublish },
+    });
+  }
+
   function handleStart() {
-    setModalContent(<CreateSession handleSuccess={handleSuccess} />);
+    setModalContent(<CreateSession handleSuccess={navigateToSession} />);
+    setModalOpen(true);
+  }
+
+  function handleJoinWithToken() {
+    setModalContent(<JoinSessionWithToken handleSuccess={navigateToToken} />);
     setModalOpen(true);
   }
 
@@ -74,10 +93,10 @@ function StartScreen() {
                 Amazon IVS Real-time
               </h1>
               <p className="mb-5 text-center">
-                Create a session to see and talk with up to 12 other
-                participants in real-time.
+                Create a session or join with a token to see and talk with up to
+                12 other participants in real-time.
               </p>
-              <div className="sm:px-8 w-full max-w-[320px]">
+              <div className="flex flex-col gap-y-2 sm:px-8 w-full max-w-[360px]">
                 <Button
                   appearance="primary"
                   style="roundedText"
@@ -85,6 +104,14 @@ function StartScreen() {
                   onClick={handleStart}
                 >
                   <span className="font-bold">Create session</span>
+                </Button>
+                <Button
+                  appearance="default"
+                  style="roundedText"
+                  fullWidth={true}
+                  onClick={handleJoinWithToken}
+                >
+                  <span className="font-bold">Join with token</span>
                 </Button>
               </div>
             </div>

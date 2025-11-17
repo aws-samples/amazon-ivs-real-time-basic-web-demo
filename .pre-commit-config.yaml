@@ -1,0 +1,15 @@
+repos:
+  - repo: https://github.com/semgrep/pre-commit
+    rev: "v1.122.0"
+    hooks:
+      - id: semgrep
+        entry: semgrep
+        args: ["--config", "p/react", "--error", "--skip-unknown-extensions"]
+  - repo: local
+    hooks:
+      - id: trufflehog
+        name: TruffleHog
+        description: Detect secrets in your data.
+        entry: bash -c 'trufflehog git file://. --since-commit HEAD --results=verified,unknown --fail --no-update'
+        language: system
+        stages: ["pre-commit", "pre-push"]

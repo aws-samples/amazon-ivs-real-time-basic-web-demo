@@ -22,6 +22,7 @@ export default {
         'error-shake': 'shake 500ms ease 1',
         'toast-enter': 'fadeScale 3s ease-in',
         'toast-exit': 'fadeScale 3s ease-in reverse',
+        'arrow-hover': 'arrowHoverAnimation 600ms ease-out',
       },
       keyframes: {
         shake: {
@@ -36,6 +37,14 @@ export default {
         fadeScale: {
           '0%': { opacity: '0', transform: 'scale(0.2)' },
           '100%': { opacity: '1', transform: 'scale(1)' },
+        },
+        arrowHoverAnimation: {
+          '0%': { transform: 'translate(0, 0) scale(1)', opacity: '1' },
+          '40%': { transform: 'translate(30px, -30px) scale(1)', opacity: '0' },
+          '41%': { transform: 'translate(-30px, 30px) scale(1.25)', opacity: '0' },
+          '60%': { transform: 'translate(0, 0) scale(1.25)', opacity: '0.8' },
+          '75%': { transform: 'translate(0, 0) scale(1.25)', opacity: '0.8' },
+          '100%': { transform: 'translate(0, 0) scale(1)', opacity: '1' },
         },
       },
     },

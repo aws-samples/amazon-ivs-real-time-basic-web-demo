@@ -24,8 +24,9 @@ function createSessionWithToken(token) {
   const attributes = token.attributes;
   const sessionId = token.topic;
   const expiration = token.exp;
+  const hasPublish = token.capabilities.allow_publish === true;
 
-  return { token, attributes, sessionId, expiration };
+  return { token, attributes, sessionId, expiration, hasPublish };
 }
 
 async function getSessionToken(id, username) {

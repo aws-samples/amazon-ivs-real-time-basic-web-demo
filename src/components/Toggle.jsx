@@ -2,7 +2,7 @@ import clsx from "clsx";
 
 function Toggle({ label, description, checked, onChange, disabled = false }) {
   return (
-    <label className="flex items-center justify-between cursor-pointer">
+    <label className="flex items-center justify-between cursor-pointer has-[:disabled]:cursor-not-allowed">
       <div className="flex flex-col">
         <span className="text-sm font-medium text-uiText/80">{label}</span>
         <span className="text-xs text-uiText/50 text-pretty">

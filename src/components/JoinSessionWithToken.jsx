@@ -5,6 +5,7 @@ import { decodeJWT, isJWTExpired } from "../helpers/jwt";
 import { Button } from "./Buttons";
 import { TokenInput } from "./TokenInput";
 import useToast from "../hooks/useToast";
+import { ArrowUpRightIcon } from "@heroicons/react/20/solid";
 
 export function JoinSessionWithToken({ handleSuccess }) {
   const [token, setToken] = useState("");
@@ -27,10 +28,10 @@ export function JoinSessionWithToken({ handleSuccess }) {
         throw new Error("Token has expired");
       }
 
-      const { sessionId, attributes, expiration } =
+      const { sessionId, attributes, expiration, hasPublish } =
         createSessionWithToken(decodedToken);
 
-      handleSuccess({ sessionId, token, attributes, expiration });
+      handleSuccess({ sessionId, token, attributes, expiration, hasPublish });
     } catch (err) {
       const errorMessage = err.message || "Could not join session";
       showToast(errorMessage, "ERROR", "join-error-toast");
@@ -80,15 +81,18 @@ export function JoinSessionWithToken({ handleSuccess }) {
           href="https://docs.aws.amazon.com/ivs/latest/RealTimeUserGuide/getting-started-distribute-tokens.html#getting-started-distribute-tokens-console"
           target="_blank"
           rel="noopener noreferrer"
-          className="text-secondary border-b border-secondary hover:border-b-2"
+          className="group relative inline-flex gap-x-0 items-center text-secondary before:content-[''] before:absolute before:-inset-y-0.5 before:-inset-x-1 hover:before:bg-surfaceAlt2/5 before:rounded"
         >
           Learn more
+          <span className="overflow-hidden">
+            <ArrowUpRightIcon className="size-4 group-hover:animate-arrow-hover" />
+          </span>
         </a>
       </span>
       <form onSubmit={handleSubmit}>
         <div className="flex justify-center gap-x-2 mb-5">
           <TokenInput
-            placeholder="eyJ..."
+            placeholder="eyJhb..."
             inputValue={token}
             onChange={updateToken}
             error={error}
@@ -102,7 +106,7 @@ export function JoinSessionWithToken({ handleSuccess }) {
             type="button"
             onClick={handlePasteToken}
           >
-            Paste token
+            Paste
           </Button>
           <Button
             appearance="primary"

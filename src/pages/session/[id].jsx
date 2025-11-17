@@ -1,18 +1,18 @@
-import LocalMediaProvider from '../../contexts/LocalMediaContext';
-import AudioFiltersProvider from '../../contexts/AudioFiltersContext';
-import StageProvider from '../../contexts/StageContext';
-import StageSession from '../../components/StageSession';
-import ModalProvider from '../../contexts/ModalContext';
-import { useNavigate, useParams } from '../../router';
-import { useLocation } from 'react-router-dom';
-import { useState } from 'react';
-import { getSessionToken } from '../../sdk/Session';
-import LocalParticipantProvider from '../../contexts/LocalParticipantContext';
-import { JoinSessionDialog } from '../../components/JoinSessionDialog';
-import { createUsername } from '../../helpers/username';
+import LocalMediaProvider from "../../contexts/LocalMediaContext";
+import AudioFiltersProvider from "../../contexts/AudioFiltersContext";
+import StageProvider from "../../contexts/StageContext";
+import StageSession from "../../components/StageSession";
+import ModalProvider from "../../contexts/ModalContext";
+import { useNavigate, useParams } from "../../router";
+import { useLocation } from "react-router-dom";
+import { useState } from "react";
+import { getSessionToken } from "../../sdk/Session";
+import LocalParticipantProvider from "../../contexts/LocalParticipantContext";
+import { JoinSessionDialog } from "../../components/JoinSessionDialog";
+import { createUsername } from "../../helpers/username";
 
 function Session() {
-  const { id } = useParams('/session/:id');
+  const { id } = useParams("/session/:id");
   const { state, pathname } = useLocation();
   const navigate = useNavigate();
   const [token, setToken] = useState(state ? state.token : undefined);
@@ -32,16 +32,16 @@ function Session() {
     } catch (err) {
       console.error(err);
       var reason;
-      const reasonType = 'ERROR';
+      const reasonType = "ERROR";
       switch (err.response.status) {
         case 400:
-          reason = 'Could not find that session';
+          reason = "Could not find that session";
           break;
         default:
-          reason = 'Could not join the session';
+          reason = "Could not join the session";
           break;
       }
-      navigate('/', { state: { reason, reasonType } });
+      navigate("/", { state: { reason, reasonType } });
     }
     setTokenPending(false);
   }
@@ -59,6 +59,7 @@ function Session() {
             <ModalProvider>
               {token !== undefined ? (
                 <StageSession
+                  isTokenSession={false}
                   pathname={pathname}
                   token={token}
                   expiration={expiration}

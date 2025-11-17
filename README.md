@@ -19,6 +19,8 @@ Follow these instructions to run the demo:
 2. Run: `npm run dev`
 3. Enter an `API_URL`, if prompted. The app will attempt to automatically retrieve an `API_URL` from your AWS account. If you do not have an `API_URL`, follow the instructions in the [Serverless README](./infra/README.md) of this repository.
 
+Note: You can launch the demo without an `API_URL`, but you will be unable to create a session. If you already have a participant token, you can join an existing stage by selecting **Join with token** on the start screen.
+
 ## Additional documentation
 
 Additional documentation for the following features is available in the `docs/` directory:

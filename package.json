@@ -10,8 +10,8 @@
     "preview": "vite preview"
   },
   "dependencies": {
-    "@aws-sdk/client-cloudformation": "^3.624.0",
-    "@aws-sdk/credential-providers": "^3.624.0",
+    "@aws-sdk/client-cloudformation": "^3.995.0",
+    "@aws-sdk/credential-providers": "^3.995.0",
     "@custom-react-hooks/use-clipboard": "^1.6.0",
     "@generouted/react-router": "^1.19.5",
     "@heroicons/react": "^2.1.3",

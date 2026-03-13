@@ -19,7 +19,7 @@
     "@ricky0123/vad-web": "^0.0.29",
     "amazon-chime-sdk-js": "^3.29.0",
     "amazon-ivs-web-broadcast": "^1.33.0",
-    "axios": "^1.6.8",
+    "axios": "^1.13.5",
     "boring-avatars": "^2.0.4",
     "classnames": "^2.5.1",
     "clsx": "^2.1.1",
